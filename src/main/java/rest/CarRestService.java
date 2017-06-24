@@ -19,20 +19,9 @@ public class CarRestService {
     @GET
     @Path("/{Id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Car getCar(@PathParam("Id") int Id) {
+    public Car getCar(@PathParam("Id") int AutoId) {
         CarServiceImpl carServiceImpl = ServiceProvider.getCarService();
-        return carServiceImpl.getCar(Id);
-    }
-
-    @DELETE
-    @Path("/{Id}")
-    public Response deleteCar(@PathParam("Id") int Id) {
-        CarServiceImpl carServiceImpl = ServiceProvider.getCarService();
-        if (carServiceImpl.deleteCar(Id)) {
-            return Response.status(204).entity("Car deleted from list.").build();
-        } else {
-            return Response.status(404).entity("Car could not be deleted.").build();
-        }
+        return carServiceImpl.getCar(AutoId);
     }
 
     @GET
@@ -49,6 +38,17 @@ public class CarRestService {
     public Car addCar(Car car) {
         CarServiceImpl carServiceImpl = ServiceProvider.getCarService();
         return carServiceImpl.addCar(car);
+    }
+
+    @DELETE
+    @Path("/{Id}")
+    public Response deleteCar(@PathParam("Id") int AutoId) {
+        CarServiceImpl carServiceImpl = ServiceProvider.getCarService();
+        if (carServiceImpl.deleteCar(AutoId)) {
+            return Response.status(204).entity("Car deleted from list.").build();
+        } else {
+            return Response.status(404).entity("Car could not be deleted.").build();
+        }
     }
 }
 
